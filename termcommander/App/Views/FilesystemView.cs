@@ -19,6 +19,8 @@ public class FilesystemView : View
 	private int firstDisplayedItemIndex = -1;
 	private int lastDisplayedItemIndex = -1;
 
+	private Dictionary<string, (int offset, int selected)> scrollHistory = new();
+
 	private const int CURSOR_LAG = 5;
 
 	public FilesystemView(WindowSize size) : base(size)
@@ -71,6 +73,12 @@ public class FilesystemView : View
 			var selectedItem = folderItemPaths[selectedItemIndex];
 			if (Directory.Exists(selectedItem))
 			{
+				if (scrollHistory.ContainsKey(currentPath))
+				{
+					scrollHistory.Remove(currentPath);
+				}
+
+				scrollHistory.Add(currentPath, (listOffset, selectedItemIndex));
 				SetFolder(selectedItem);
 				DisplayCurrentFolder();
 			}
@@ -96,8 +104,16 @@ public class FilesystemView : View
 	{
 		currentPath = folderPath;
 
-		listOffset = 0;
-		selectedItemIndex = 0;
+		if (scrollHistory.TryGetValue(currentPath, out var pos))
+		{
+			listOffset = pos.offset;
+			selectedItemIndex = pos.selected;
+		}
+		else
+		{
+			listOffset = 0;
+			selectedItemIndex = 0;
+		}
 
 		firstDisplayedItemIndex = -1;
 		lastDisplayedItemIndex = -1;
