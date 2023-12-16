@@ -56,6 +56,11 @@ public abstract class Container : NcWindow
 
 	private void Update(string? keyPressed)
 	{
+		if (!Panels.Any(p => p.IsActive))
+		{
+			Panels.First().IsActive = true;
+		}
+
 		if (keyPressed is null || keyPressed == string.Empty)
 		{
 			Panels.ForEach(p => p.Update(null));

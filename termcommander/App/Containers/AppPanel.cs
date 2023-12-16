@@ -12,8 +12,7 @@ public class AppPanel : Panel
 	public override List<View> SetStartupViews()
 	{
 		return new List<View>() {
-			new FilesystemView(size.GetTopHalf()),
-			new FilesystemView(size.GetBottomHalf())
+			new FilesystemView(size)
 		};
 	}
 }

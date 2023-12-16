@@ -21,7 +21,7 @@ public class Program
 		}
 		catch (Exception e)
 		{
-			throw new Exception("Failed init NCurses. DLL is most likely missing." +
+			throw new Exception("Failed init NCurses." +
 				"See https://github.com/MV10/dotnet-curses/?tab=readme-ov-file#the-native-library", e);
 		}
 
