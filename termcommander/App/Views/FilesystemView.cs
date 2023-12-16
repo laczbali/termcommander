@@ -62,8 +62,9 @@ public class FilesystemView : View
 			if (selectedItemIndex - firstDisplayedItemIndex < CURSOR_LAG) listOffset -= 1;
 			if (lastDisplayedItemIndex - selectedItemIndex < CURSOR_LAG) listOffset += 1;
 
-			if (listOffset < 0) listOffset = 0;
 			if (listOffset > size.Rows - 4) listOffset = size.Rows - 3; // top-bottom borders, scroll-up indicator
+			if ((folderItemNames.Count - listOffset) < (size.Rows - 3)) listOffset--;
+			if (listOffset < 0) listOffset = 0;
 
 			DisplayCurrentFolder();
 		}
