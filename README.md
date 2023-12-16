@@ -16,8 +16,8 @@ Install dotnet runtime
 ```
 Linux:
 sudo apt-get update
-sudo apt-get install -y dotnet-runtime-8.0
+sudo apt-get install -y dotnet-runtime-6.0
 
 Windows:
-https://dotnet.microsoft.com/en-us/download/dotnet/8.0
+https://dotnet.microsoft.com/en-us/download/dotnet/6.0
 ```
