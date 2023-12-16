@@ -44,7 +44,7 @@ public class FilesystemView : View
 
 	protected override UpdateModel UpdateInner(string? keyPressed)
 	{
-		ToggleBox();
+		ToggleBox(currentPath);
 
 		if (keyPressed == "up")
 		{
@@ -140,6 +140,8 @@ public class FilesystemView : View
 			folderItemPaths.Add(file);
 			folderItemNames.Add($"   {Shorten(Path.GetFileName(file))}");
 		}
+
+		ToggleBox(currentPath);
 	}
 
 	private void DisplayCurrentFolder()

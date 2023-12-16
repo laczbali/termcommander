@@ -20,11 +20,15 @@ public abstract class NcWindow
 		NCurses.NoDelay(windowObj, true);
 	}
 
-	public void ToggleBox(bool on = true)
+	public void ToggleBox(string? title = null, bool on = true)
 	{
 		if (on)
 		{
 			NCurses.WindowBorder(windowObj, (char)0, (char)0, (char)0, (char)0, (char)0, (char)0, (char)0, (char)0);
+			if (title is not null)
+			{
+				NCurses.MoveWindowAddString(windowObj, 0, 2, $" {title} ");
+			}
 		}
 		else
 		{

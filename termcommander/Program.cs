@@ -8,6 +8,15 @@ public class Program
 {
 	static void Main(string[] args)
 	{
+
+		// TODO next steps:
+		// - add ability to select one or more items in the file viewer
+		// - add ability to delete selected items
+		// - add ability to copy-move selected items between panes (use events, maybe)
+
+		// TODO long term:
+		// - terminal resize shouldn't completely break the app
+
 		try
 		{
 			// init ncurses
