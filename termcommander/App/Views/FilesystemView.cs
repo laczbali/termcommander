@@ -17,18 +17,20 @@ public class FilesystemView : View
 
 	public override void FocusLost()
 	{
-		NCurses.WindowAddString(windowObj, "FocusLost");
+		NCurses.MoveWindowAddString(windowObj, 0, 0, "FocusLost");
 		NCurses.WindowRefresh(windowObj);
 	}
 
 	protected override void FocusGained()
 	{
-		NCurses.WindowAddString(windowObj, "FocusGained");
+		NCurses.MoveWindowAddString(windowObj, 0, 0, "FocusGained");
 		NCurses.WindowRefresh(windowObj);
 	}
 
 	protected override UpdateModel UpdateInner(string? keyPressed)
 	{
+		ToggleBox();
+
 		return new UpdateModel
 		{
 			SwitchPanelFocus = keyPressed == "left" || keyPressed == "right",

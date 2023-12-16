@@ -59,6 +59,7 @@ public abstract class Container : NcWindow
 		if (keyPressed is null || keyPressed == string.Empty)
 		{
 			Panels.ForEach(p => p.Update(null));
+			return;
 		}
 
 		// update right panel if it is active, default to left panel

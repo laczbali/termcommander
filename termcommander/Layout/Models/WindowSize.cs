@@ -19,7 +19,7 @@ public class WindowSize
 	public WindowSize GetRightHalf() => new WindowSize
 	{
 		Rows = Rows,
-		Columns = Columns / 2,
+		Columns = (Columns / 2) - 1, // -1 added on purpose
 		RowOrigin = RowOrigin,
 		ColumnsOrigin = (Columns / 2) + 1
 	};
@@ -36,7 +36,7 @@ public class WindowSize
 	{
 		Rows = Rows / 2,
 		Columns = Columns,
-		RowOrigin = (Rows / 2) + 1,
+		RowOrigin = Rows / 2, // +1 omitted on purpose
 		ColumnsOrigin = ColumnsOrigin
 	};
 

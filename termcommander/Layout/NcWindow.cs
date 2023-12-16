@@ -15,4 +15,18 @@ public abstract class NcWindow
 		NCurses.Keypad(windowObj, true);
 		NCurses.NoDelay(windowObj, true);
 	}
+
+	public void ToggleBox(bool on = true)
+	{
+		if (on)
+		{
+			NCurses.WindowBorder(windowObj, '|', '|', '-', '-', '+', '+', '+', '+');
+		}
+		else
+		{
+			NCurses.WindowBorder(windowObj, ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ');
+		}
+
+		NCurses.WindowRefresh(windowObj);
+	}
 }

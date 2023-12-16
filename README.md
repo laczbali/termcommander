@@ -1,6 +1,7 @@
 # termcommander
 
-Relying on [dotnet-curses](https://github.com/MV10/dotnet-curses/).
+Relying on [ncurses](https://tldp.org/HOWTO/NCURSES-Programming-HOWTO/),
+through [dotnet-curses](https://github.com/MV10/dotnet-curses/).
 
 Install ncurses
 ```

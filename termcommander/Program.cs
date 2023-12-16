@@ -14,8 +14,10 @@ public class Program
 			var screen = NCurses.InitScreen();
 			NCurses.Raw();
 			NCurses.NoEcho();
+			NCurses.CBreak();
 			NCurses.Keypad(screen, true);
 			NCurses.NoDelay(screen, true);
+			NCurses.Refresh();
 		}
 		catch (Exception e)
 		{
