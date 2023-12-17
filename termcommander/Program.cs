@@ -10,9 +10,8 @@ public class Program
 	{
 
 		// TODO next steps:
-		// - add ability to select one or more items in the file viewer
-		// - add ability to delete selected items
 		// - add ability to copy-move selected items between panes (use events, maybe)
+		// - handle if we don't have permission to access a folder
 
 		// TODO long term:
 		// - terminal resize shouldn't completely break the app

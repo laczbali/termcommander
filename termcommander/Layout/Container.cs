@@ -111,6 +111,7 @@ public abstract class Container : NcWindow
 			260 => "left",
 			261 => "right",
 			263 => "backspace",
+			330 => "del",
 			_ => null
 		};
 

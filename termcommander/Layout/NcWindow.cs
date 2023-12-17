@@ -72,6 +72,31 @@ public abstract class NcWindow
 		NCurses.InitPair((short)ColorPairs.RedOnBlack, CursesColor.RED, CursesColor.BLACK);
 	}
 
+	public string ShortenString(string str, int? maxLength = null)
+	{
+		// 2 chars for borders, 3 chars for left padding
+		// 3 chars for "..." if needed
+		if (maxLength is null)
+		{
+			maxLength = size.Columns - 5;
+		}
+
+		if (str.Length < maxLength) return str;
+		var shorter = str.Substring(0, (int)maxLength - 3);
+		return $"{shorter}...";
+	}
+
+	/// <summary>
+	/// Clears the popup from the screen, disposes of the window object and returns null.
+	/// </summary>
+	/// <returns></returns>
+	public NcWindow? Dispose()
+	{
+		ToggleBox(on: false);
+		NCurses.DeleteWindow(windowObj);
+		return null;
+	}
+
 	public enum ColorPairs
 	{
 		BlueOnBlack = 1,
