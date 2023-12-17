@@ -76,4 +76,10 @@ public abstract class Panel : NcWindow, IWindow
 		// we already handled the view change (if it was needed)
 		return new UpdateModel();
 	}
+
+	public override void Dispose()
+	{
+		Views.ForEach(v => v.Dispose());
+		base.Dispose();
+	}
 }

@@ -2,7 +2,7 @@
 using Mindmagma.Curses;
 
 namespace ConsoleApp.Layout;
-public abstract class NcWindow
+public abstract class NcWindow : IDisposable
 {
 	private static bool colorsInitialized = false;
 
@@ -87,14 +87,13 @@ public abstract class NcWindow
 	}
 
 	/// <summary>
-	/// Clears the popup from the screen, disposes of the window object and returns null.
+	/// Clears the popup from the screen, disposes of the window object
 	/// </summary>
 	/// <returns></returns>
-	public NcWindow? Dispose()
+	public virtual void Dispose()
 	{
 		ToggleBox(on: false);
 		NCurses.DeleteWindow(windowObj);
-		return null;
 	}
 
 	public enum ColorPairs

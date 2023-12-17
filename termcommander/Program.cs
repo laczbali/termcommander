@@ -44,7 +44,10 @@ public class Program
 		}
 
 		// main app
-		new AppContainer(WindowSize.FULLSIZE).Start();
+		using (var container = new AppContainer(WindowSize.FULLSIZE))
+		{
+			container.Start();
+		}
 
 		// cleanup
 		NCurses.EndWin();

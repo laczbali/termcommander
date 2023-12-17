@@ -84,6 +84,12 @@ public abstract class Container : NcWindow
 		}
 	}
 
+	public override void Dispose()
+	{
+		Panels.ForEach(p => p.Dispose());
+		base.Dispose();
+	}
+
 	private string? GetKeyboardString(int keyCode)
 	{
 		if (keyCode == -1)

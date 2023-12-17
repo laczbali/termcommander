@@ -44,6 +44,17 @@ public class FilesystemView : View
 
 	protected override void FocusGained() => DisplayCurrentFolder();
 
+	public override void Dispose()
+	{
+		if (confirmDeletePopup is not null)
+		{
+			confirmDeletePopup.Dispose();
+			confirmDeletePopup = null;
+			selectedItems.Clear();
+		}
+		base.Dispose();
+	}
+
 	protected override UpdateModel UpdateInner(string? keyPressed)
 	{
 		ToggleBox(currentPath);
@@ -64,7 +75,8 @@ public class FilesystemView : View
 			}
 
 			keyPressed = null;
-			confirmDeletePopup = (ConfirmDeletePopup?)confirmDeletePopup.Dispose();
+			confirmDeletePopup.Dispose();
+			confirmDeletePopup = null;
 			selectedItems.Clear();
 			refreshScreen = true;
 		}
