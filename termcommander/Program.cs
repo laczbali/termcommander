@@ -11,10 +11,20 @@ public class Program
 
 		// TODO next steps:
 		// - add ability to copy-move selected items between panes (use events, maybe)
+		// - add ability to create files and directories
 		// - handle if we don't have permission to access a folder
 
 		// TODO long term:
+		// - command list footer
+		// - file open view
+		// - command runner view
 		// - terminal resize shouldn't completely break the app
+		// - add ability to save/load view setups (eg open up like x-y at startup, or go to home dir from anywhere), maybe switch with number keys?
+
+#if DEBUG
+		// this is a workaround for resizing, since doing it mid-run doesn't work yet
+		Console.ReadKey();
+#endif
 
 		try
 		{
