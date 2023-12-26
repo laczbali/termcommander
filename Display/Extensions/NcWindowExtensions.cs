@@ -1,4 +1,5 @@
-﻿using Mindmagma.Curses;
+﻿using Display.Models;
+using Mindmagma.Curses;
 
 namespace Display.Extensions;
 public static class NcWindowExtensions
@@ -55,6 +56,10 @@ public static class NcWindowExtensions
             NCurses.WindowAttributeOff(window.windowObj, NCurses.ColorPair(pairId));
         }
     }
+
+    /// <inheritdoc cref="ToggleColorPair(NcWindow, int, bool)"/>
+    public static void ToggleColorPair(this NcWindow window, ColorPair color, bool on)
+        => ToggleColorPair(window, color.Id, on);
 
     /// <summary>
     /// Starts at the current cursor position and writes ' ' until the end of the line

@@ -1,8 +1,8 @@
 ﻿using Display;
 using Display.Models;
 
-namespace ConsoleApp;
-internal class PanelContainer : NcWindow
+namespace ConsoleApp.Windows.Filesystem;
+internal class FilesystemContainer : NcWindow
 {
     protected override void InitializeInner()
     {

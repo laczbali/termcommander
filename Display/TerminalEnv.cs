@@ -48,7 +48,7 @@ public static class TerminalEnv
     /// <summary>
     /// Initializes the color pairs (if not already initialized)
     /// </summary>
-    public static void InitColors(IEnumerable<IColorPair> colors)
+    public static void InitColors(IEnumerable<ColorPair> colors)
     {
         if (_initializedColorPairIds is not null) return;
         _initializedColorPairIds = new();
