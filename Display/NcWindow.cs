@@ -8,10 +8,10 @@ public abstract class NcWindow
     public bool IsActive = false;
 
     private IntPtr _windowObj = IntPtr.Zero;
+    internal IntPtr windowObj => _windowObj;
     private WindowSize _size = WindowSize.Null;
 
     protected bool isInitialized => _windowObj != IntPtr.Zero;
-    protected IntPtr windowObj => _windowObj;
     protected WindowSize Size => _size;
     protected List<NcWindow> Children = new();
 

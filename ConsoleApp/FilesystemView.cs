@@ -7,7 +7,7 @@ internal class FilesystemView : NcWindow
 {
     protected override UpdateResult UpdateInner(string? keypressed)
     {
-        windowObj.ToggleBox($"ACTIVE - {IsActive}");
+        this.ToggleBox($"ACTIVE - {IsActive}");
         return new UpdateResult();
     }
 }
