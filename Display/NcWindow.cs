@@ -19,7 +19,7 @@ public abstract class NcWindow
     /// Run any necessary startup code here.
     /// </summary>
     /// <param name="softInit">If set to true, we are just reloading. Otherwise it is a fresh start.</param>
-    protected virtual void InitializeInner(bool softInit = false) { }
+    protected virtual void InitializeInner() { }
     /// <summary>
     /// Run the core logic of the window here
     /// </summary>
@@ -28,13 +28,13 @@ public abstract class NcWindow
     /// Run any necessary cleanup code here.
     /// </summary>
     /// <param name="softDispose">If set to true, we are just reloading. Otherwise we are stopping for good.</param>
-    protected virtual void DisposeInner(bool softDispose = false) { }
+    protected virtual void DisposeInner() { }
 
     /// <summary>
     /// Creates and applies default config to a new window, <br/>
     /// then calls InitializeInner
     /// </summary>
-    public void Initialize(WindowSize size, bool softInit = false)
+    public void Initialize(WindowSize size)
     {
         if (isInitialized) return;
 
@@ -43,7 +43,7 @@ public abstract class NcWindow
         NCurses.Keypad(_windowObj, true);
         NCurses.NoDelay(_windowObj, true);
 
-        InitializeInner(softInit);
+        InitializeInner();
     }
 
     /// <summary>
@@ -61,22 +61,11 @@ public abstract class NcWindow
     /// 2. Calls virtual DisposeInner       <br/>
     /// 3. Deletes the window object        <br/>
     /// </summary>
-    public void Dispose(bool softDispose = false)
+    public void Dispose()
     {
         Children?.ForEach(x => x?.Dispose());
-        DisposeInner(softDispose);
+        DisposeInner();
         NCurses.DeleteWindow(_windowObj);
         _windowObj = IntPtr.Zero;
-    }
-
-    /// <summary>
-    /// Calls Dispose, Initialize, Update <br/>
-    /// If newSize is null, the window will be reloaded with the same size as before
-    /// </summary>
-    public void Reload(WindowSize? newSize = null)
-    {
-        Dispose(softDispose: true);
-        Initialize(newSize ?? _size, softInit: true);
-        Update(null);
     }
 }

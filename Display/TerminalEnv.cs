@@ -7,7 +7,6 @@ namespace Display;
 public static class TerminalEnv
 {
     public static string ExitKey = "esc";
-    public static string ReloadKey = "f5";
 
     private static IntPtr screen = IntPtr.Zero;
     private static List<int>? _initializedColorPairIds = null;
@@ -37,15 +36,7 @@ public static class TerminalEnv
             var keyCode = NCurses.GetChar();
             keyPressed = GetKeyboardString(keyCode);
 
-            if (keyPressed is null) continue;
-            if (keyPressed == ReloadKey)
-            {
-                _rootWindow.Reload(WindowSize.Fullscreen);
-            }
-            else
-            {
-                _rootWindow.Update(keyPressed);
-            }
+            if (keyPressed is not null) _rootWindow.Update(keyPressed);
         }
         while (keyPressed != ExitKey);
 

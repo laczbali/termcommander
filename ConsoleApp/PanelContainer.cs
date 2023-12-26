@@ -4,7 +4,7 @@ using Display.Models;
 namespace ConsoleApp;
 internal class PanelContainer : NcWindow
 {
-    protected override void InitializeInner(bool softInit = false)
+    protected override void InitializeInner()
     {
         var leftPanel = new FilesystemView();
         var rightPanel = new FilesystemView();
@@ -34,7 +34,7 @@ internal class PanelContainer : NcWindow
         return new UpdateResult();
     }
 
-    protected override void DisposeInner(bool softDispose = false)
+    protected override void DisposeInner()
     {
         Children.Clear();
     }
