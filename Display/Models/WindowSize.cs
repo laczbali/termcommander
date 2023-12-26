@@ -1,6 +1,4 @@
-﻿using System.Runtime.InteropServices;
-
-namespace Display.Models;
+﻿namespace Display.Models;
 public class WindowSize
 {
     public int Rows { get; set; }
@@ -48,22 +46,7 @@ public class WindowSize
     }
 
     public static WindowSize Null => new WindowSize(0, 0, 0, 0);
-    public static WindowSize Fullscreen
-    {
-        get
-        {
-            if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
-            {
-                // run "mode con"
-            }
-            else
-            {
-                // run "stty size"
-            }
-
-            throw new NotImplementedException();
-        }
-    }
+    public static WindowSize Fullscreen => new WindowSize(Console.WindowHeight, Console.WindowWidth, 0, 0);
 
     public override bool Equals(object? target)
     {
