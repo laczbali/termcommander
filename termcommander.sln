@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.5.33516.290
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Legacy", "termcommander\Legacy.csproj", "{B1152B21-1436-4CBF-977B-64EE0436CACD}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Display", "Display\Display.csproj", "{78EF7D88-6EB7-4213-9BDA-A234F1AEE825}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleApp", "ConsoleApp\ConsoleApp.csproj", "{E91F0A9A-B21D-4398-84CF-7676AFED5B36}"
@@ -15,10 +13,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{B1152B21-1436-4CBF-977B-64EE0436CACD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B1152B21-1436-4CBF-977B-64EE0436CACD}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B1152B21-1436-4CBF-977B-64EE0436CACD}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B1152B21-1436-4CBF-977B-64EE0436CACD}.Release|Any CPU.Build.0 = Release|Any CPU
 		{78EF7D88-6EB7-4213-9BDA-A234F1AEE825}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{78EF7D88-6EB7-4213-9BDA-A234F1AEE825}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{78EF7D88-6EB7-4213-9BDA-A234F1AEE825}.Release|Any CPU.ActiveCfg = Release|Any CPU
