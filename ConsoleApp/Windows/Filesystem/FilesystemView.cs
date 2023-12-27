@@ -8,9 +8,10 @@ namespace ConsoleApp.Windows.Filesystem;
 internal class FilesystemView : ScrollMenu
 {
     private string _currentPath = string.Empty;
-    private List<string> _files = new List<string>();
-    private List<string> _dirs = new List<string>();
-    protected List<int> _selectedItems = new List<int>();
+    private List<string> _files = new();
+    private List<string> _dirs = new();
+    private List<int> _selectedItems = new();
+    private Dictionary<string, int> _cursorPositionHistory = new();
 
     // ScrollMenu overrides
 
@@ -83,12 +84,16 @@ internal class FilesystemView : ScrollMenu
         if (path is null || path == string.Empty) throw new ArgumentException("Path must not be empty");
 
         var contents = GetFolderContents(path);
-
         _dirs = contents.dirs;
         _files = contents.files;
-        _currentPath = path;
 
-        ResetMenu();
+        if (_currentPath != string.Empty)
+            _cursorPositionHistory[_currentPath] = CursorItemIndex;
+        ResetMenu(); // this will reset cursor position
+        if (_cursorPositionHistory.TryGetValue(path, out var cursorPosition))
+            StepCursor(cursorPosition);
+
+        _currentPath = path;
     }
 
     // custom methods

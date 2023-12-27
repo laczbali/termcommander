@@ -46,6 +46,8 @@ public abstract class ScrollMenu : NcWindow
     protected int CursorItemIndex { get; private set; } = 0;
 
     private int _itemOffset = 0;
+
+    // current state (derived)
     private int _firstDisplayedItemIndex => _itemOffset;
     private int _lastDisplayedItemIndex => _itemOffset + _maxRowCount - 1;
     private int _scrollBarOffset => (int)((double)_itemOffset / _maxItemOffset * (_maxRowCount - _scrollBarHeight));
