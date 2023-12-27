@@ -11,9 +11,12 @@ public abstract class NcWindow
     internal IntPtr windowObj => _windowObj;
     private WindowSize _size = WindowSize.Null;
 
+    private string _id = GetId();
+    public string Id => _id;
+
     protected bool isInitialized => _windowObj != IntPtr.Zero;
-    protected WindowSize Size => _size;
-    protected List<NcWindow> Children = new();
+    public WindowSize Size => _size;
+    public List<NcWindow> Children = new();
 
     /// <summary>
     /// Run any necessary startup code here.
@@ -67,5 +70,22 @@ public abstract class NcWindow
         DisposeInner();
         NCurses.DeleteWindow(_windowObj);
         _windowObj = IntPtr.Zero;
+    }
+
+    private static string GetId()
+    {
+        const string allowedChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+        var random = new Random();
+        return new string(Enumerable.Repeat(allowedChars, 8).Select(s => s[random.Next(s.Length)]).ToArray());
+    }
+
+    public override bool Equals(object? obj)
+    {
+        return Id == (obj as NcWindow)?.Id;
+    }
+
+    public override int GetHashCode()
+    {
+        return Id.GetHashCode();
     }
 }

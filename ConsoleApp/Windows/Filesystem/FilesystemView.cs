@@ -1,4 +1,5 @@
-﻿using ConsoleApp.Models;
+﻿using ConsoleApp.Extensions;
+using ConsoleApp.Models;
 using Display.Components;
 using Display.Extensions;
 using Display.Models;
@@ -12,6 +13,9 @@ internal class FilesystemView : ScrollMenu
     private List<string> _dirs = new();
     private List<int> _selectedItems = new();
     private Dictionary<string, int> _cursorPositionHistory = new();
+    private string errorPopupId = string.Empty;
+
+    private bool _hasActivePopup => Children.Any();
 
     // ScrollMenu overrides
 
@@ -50,7 +54,7 @@ internal class FilesystemView : ScrollMenu
 
     protected override UpdateResult UpdateInner(string? keypressed)
     {
-        if (IsActive)
+        if (IsActive && !_hasActivePopup)
         {
             // cursor movement
             if (keypressed == "up" || keypressed == "down")
@@ -72,6 +76,14 @@ internal class FilesystemView : ScrollMenu
                 CloseItem();
             if (keypressed == "del")
                 DeleteItems();
+        }
+        else if (IsActive && _hasActivePopup)
+        {
+            // popup handling
+            if (keypressed == "enter")
+            {
+                errorPopupId = this.RemovePopup(errorPopupId);
+            }
         }
 
         this.ToggleBox(_currentPath);
@@ -117,7 +129,7 @@ internal class FilesystemView : ScrollMenu
             catch (UnauthorizedAccessException)
             {
                 Debug.WriteLine($"Access denied to {dir}");
-                // TODO: popup message
+                errorPopupId = this.CreateErrorPopup($"Access denied");
             }
         }
         else

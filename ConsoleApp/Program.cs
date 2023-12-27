@@ -11,7 +11,6 @@ TerminalEnv.Execute<FilesystemContainer>();
 
 /*
  * TODOs
- *  popup for no folder access
  *  delete items
  *  copy/move selected items between panes
  *  create files and directories

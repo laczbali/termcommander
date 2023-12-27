@@ -14,6 +14,9 @@ public class WindowSize
         ColumnsOrigin = columnsOrigin;
     }
 
+    public int GetHorizontalCenter(int offset = 0) => (Columns / 2) + offset;
+    public int GetVerticalCenter(int offset = 0) => (Rows / 2) + offset;
+
     public WindowSize GetHorizontalPartial(int divideBy = 2, int index = 0)
     {
         var result = GetPartial(divideBy, index, Columns, Rows, ColumnsOrigin, RowOrigin);
