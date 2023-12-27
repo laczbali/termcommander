@@ -65,13 +65,13 @@ internal class FilesystemView : ScrollMenu
                     _selectedItems.Add(CursorItemIndex);
             }
 
-            // item opening
+            // item manipulation
             if (keypressed == "enter")
                 OpenItem();
-
-            // item closing
             if (keypressed == "backspace")
                 CloseItem();
+            if (keypressed == "del")
+                DeleteItems();
         }
 
         this.ToggleBox(_currentPath);
@@ -137,5 +137,10 @@ internal class FilesystemView : ScrollMenu
         }
 
         // TODO: file closing
+    }
+
+    private void DeleteItems()
+    {
+        // TODO: delete stuff
     }
 }
