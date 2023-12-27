@@ -8,7 +8,8 @@ internal static class Colors
     internal static List<ColorPair> AsList => new List<ColorPair>
     {
         BlueOnBlack,
-        RedOnBlack
+        RedOnBlack,
+        GreenOnBlack
     };
 
     internal static ColorPair BlueOnBlack => new ColorPair
@@ -22,6 +23,13 @@ internal static class Colors
     {
         Id = 2,
         Foreground = CursesColor.RED,
+        Background = CursesColor.BLACK
+    };
+
+    internal static ColorPair GreenOnBlack => new ColorPair
+    {
+        Id = 3,
+        Foreground = CursesColor.GREEN,
         Background = CursesColor.BLACK
     };
 }

@@ -146,7 +146,7 @@ public abstract class ScrollMenu : NcWindow
 
     /// <summary>
     /// Runs before the current row is displayed.
-    /// By default, it sets the STANDOUT if the cursor is on the current row.
+    /// By default, it sets the STANDOUT/BOLD if the cursor is on the current row.
     /// </summary>
     /// <param name="itemIndex">Which item we are currently showing</param>
     /// <param name="lineIndex">Which window line we are currently on</param>
@@ -155,16 +155,20 @@ public abstract class ScrollMenu : NcWindow
         this.ToggleAttribute(
             CursesAttribute.STANDOUT,
             itemIndex == CursorItemIndex && IsActive);
+        this.ToggleAttribute(
+            CursesAttribute.BOLD,
+            itemIndex == CursorItemIndex && !IsActive);
     }
 
     /// <summary>
     /// Runs after the current row is displayed.
-    /// By default, it clears the STANDOUT attribute.
+    /// By default, it clears the STANDOUT and BOLD attributes.
     /// </summary>
     /// <param name="itemIndex">Which item we are currently showing</param>
     /// <param name="lineIndex">Which window line we are currently on</param>
     protected virtual void PostDisplayRow(int itemIndex, int lineIndex)
     {
         this.ToggleAttribute(CursesAttribute.STANDOUT, false);
+        this.ToggleAttribute(CursesAttribute.UNDERLINE, false);
     }
 }
