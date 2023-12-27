@@ -5,6 +5,43 @@ namespace Display.Extensions;
 public static class NcWindowExtensions
 {
     /// <summary>
+    /// Move cursor to the specified position, and write the string
+    /// </summary>
+    public static void WriteAtPosition(this NcWindow window, int y, int x, string str)
+        => NCurses.MoveWindowAddString(window.windowObj, y, x, str);
+
+    /// <summary>
+    /// Write the string at the current cursor position
+    /// </summary>
+    public static void Write(this NcWindow window, string str)
+        => NCurses.WindowAddString(window.windowObj, str);
+
+    /// <summary>
+    /// Move the cursor to the specified position.
+    /// If a dimension is null, the cursor will not be moved in that dimension.
+    /// </summary>
+    public static void MoveCursor(this NcWindow window, int? y = null, int? x = null)
+    {
+        NCurses.GetYX(window.windowObj, out var curY, out var curX);
+        NCurses.WindowMove(window.windowObj, y ?? curY, x ?? curX);
+    }
+
+    /// <summary>
+    /// Toggle a CursesAttribute on or off
+    /// </summary>
+    public static void ToggleAttribute(this NcWindow window, uint attribute, bool on)
+    {
+        if (on)
+        {
+            NCurses.WindowAttributeOn(window.windowObj, attribute);
+        }
+        else
+        {
+            NCurses.WindowAttributeOff(window.windowObj, attribute);
+        }
+    }
+
+    /// <summary>
     /// Draws the window border and title
     /// </summary>
     /// <param name="title"></param>
@@ -67,9 +104,11 @@ public static class NcWindowExtensions
     /// <param name="rightMargin">It will leave this many characters untouched at the end of the line</param>
     public static void ClearRestOfLine(this NcWindow window, int rightMargin = 1)
     {
-        NCurses.GetMaxYX(window.windowObj, out _, out var colCount);
-        NCurses.GetYX(window.windowObj, out _, out var colCursor);
-        for (var i = colCursor; i < colCount - rightMargin; i++)
+        NCurses.GetYX(window.windowObj, out var rowCursor, out var colCursor);
+        NCurses.GetMaxYX(window.windowObj, out var maxRow, out var maxCol);
+        maxCol -= rightMargin;
+
+        for (var i = colCursor; i < maxCol; i++)
         {
             NCurses.WindowAddChar(window.windowObj, ' ');
         }

@@ -8,22 +8,16 @@ public static class TerminalEnv
 {
     public static string ExitKey = "esc";
 
-    private static IntPtr screen = IntPtr.Zero;
+    private static IntPtr _screen = IntPtr.Zero;
     private static List<int>? _initializedColorPairIds = null;
     private static NcWindow? _rootWindow = null;
 
-    internal static bool NCursesInitialized => screen != IntPtr.Zero;
+    internal static bool NCursesInitialized => _screen != IntPtr.Zero;
     internal static List<int>? InitializedColorPairIds => _initializedColorPairIds;
 
     public static void Execute<T>() where T : NcWindow, new()
     {
-        screen = NCurses.InitScreen();
-        NCurses.Raw();
-        NCurses.NoEcho();
-        NCurses.CBreak();
-        NCurses.Keypad(screen, true);
-        NCurses.NoDelay(screen, true);
-        NCurses.Refresh();
+        InitNcurses();
 
         _rootWindow = new T();
         _rootWindow.Initialize(WindowSize.Fullscreen);
@@ -41,8 +35,7 @@ public static class TerminalEnv
         while (keyPressed != ExitKey);
 
         _rootWindow.Dispose();
-        NCurses.EndWin();
-        screen = IntPtr.Zero;
+        CloseNcurses();
     }
 
     /// <summary>
@@ -50,6 +43,13 @@ public static class TerminalEnv
     /// </summary>
     public static void InitColors(IEnumerable<ColorPair> colors)
     {
+        InitNcurses();
+        if (!NCurses.HasColors())
+        {
+            Debug.WriteLine("Terminal does not support colors");
+            return;
+        }
+
         if (_initializedColorPairIds is not null) return;
         _initializedColorPairIds = new();
 
@@ -59,6 +59,27 @@ public static class TerminalEnv
             NCurses.InitPair((short)c.Id, c.Foreground, c.Background);
             _initializedColorPairIds.Add(c.Id);
         }
+    }
+
+    private static void InitNcurses()
+    {
+        if (NCursesInitialized) return;
+
+        _screen = NCurses.InitScreen();
+        NCurses.Raw();
+        NCurses.NoEcho();
+        NCurses.CBreak();
+        NCurses.Keypad(_screen, true);
+        NCurses.NoDelay(_screen, true);
+        NCurses.Refresh();
+    }
+
+    private static void CloseNcurses()
+    {
+        if (!NCursesInitialized) return;
+
+        NCurses.EndWin();
+        _screen = IntPtr.Zero;
     }
 
     private static string? GetKeyboardString(int keyCode)
