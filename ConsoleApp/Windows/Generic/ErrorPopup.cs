@@ -7,6 +7,7 @@ internal class ErrorPopup : NcWindow
 {
     private NcWindow? _parentWindow = null;
     private bool _initLoopOver = false;
+    private string _oldFooterText = string.Empty;
 
     private string _message = string.Empty;
     public string Message
@@ -25,14 +26,18 @@ internal class ErrorPopup : NcWindow
         _parentWindow = parentWindow;
         _message = message.ShortenString(Size.Columns - 2);
         _parentWindow.Children.Add(this);
+        _oldFooterText = Footer.Text;
         DisplayContents();
         return Id;
     }
 
     protected override UpdateResult UpdateInner(string? keypressed)
     {
+        Footer.Text = "(ENT)Close";
+
         if (keypressed == "enter" && _initLoopOver)
         {
+            Footer.Text = _oldFooterText;
             return new UpdateResult
             {
                 WindowId = Id,

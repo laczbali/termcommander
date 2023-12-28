@@ -56,6 +56,8 @@ internal class FilesystemView : ScrollMenu
     {
         if (IsActive && !HasActivePopup)
         {
+            Footer.Text = "(ENT)Open (BSP)Back (SPC)Select (DEL)ete (C)opy (M)ove (N)ew";
+
             // cursor movement
             if (keypressed == "up" || keypressed == "down")
                 StepCursor(keypressed);
