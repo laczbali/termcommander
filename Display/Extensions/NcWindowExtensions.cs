@@ -44,8 +44,6 @@ public static class NcWindowExtensions
     /// <summary>
     /// Draws the window border and title
     /// </summary>
-    /// <param name="title"></param>
-    /// <param name="on"></param>
     public static void ToggleBox(this NcWindow window, string? title = null, bool on = true)
     {
         if (on)
@@ -71,8 +69,6 @@ public static class NcWindowExtensions
     /// <summary>
     /// Toggles the color pair on or off
     /// </summary>
-    /// <param name="pair"></param>
-    /// <param name="on"></param>
     public static void ToggleColorPair(this NcWindow window, int pairId, bool on)
     {
         if (TerminalEnv.InitializedColorPairIds is null)

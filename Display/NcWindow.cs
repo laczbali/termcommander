@@ -52,11 +52,25 @@ public abstract class NcWindow
     /// <summary>
     /// Calls UpdateInner, refresh, then calls Update on all children
     /// </summary>
-    public void Update(string? keypressed)
+    public UpdateResult Update(string? keypressed)
     {
         var result = UpdateInner(keypressed);
         if (result.RefreshWindow) NCurses.WindowRefresh(_windowObj);
-        Children?.ForEach(x => x?.Update(keypressed));
+
+        var childUpdateResults = Children?.Select(x => x?.Update(keypressed)).ToList() ?? new();
+        childUpdateResults.Where(x => x?.RemoveSelfFromParent == true).ToList().ForEach(x =>
+        {
+            var child = Children?.Find(c => c.Id == x?.WindowId);
+            if (child is null) return;
+            child.Dispose();
+            Children?.Remove(child);
+        });
+
+        return new UpdateResult
+        {
+            WindowId = Id,
+            RemoveSelfFromParent = result.RemoveSelfFromParent
+        };
     }
 
     /// <summary>

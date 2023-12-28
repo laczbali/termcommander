@@ -20,6 +20,8 @@ internal class FilesystemContainer : NcWindow
 
     protected override UpdateResult UpdateInner(string? keypressed)
     {
+        if (Children.Any(x => ((FilesystemView)x).HasActivePopup)) return new UpdateResult();
+
         if (keypressed == "left")
         {
             Children[0].IsActive = true;
