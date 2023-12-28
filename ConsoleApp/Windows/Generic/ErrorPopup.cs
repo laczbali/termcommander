@@ -22,7 +22,7 @@ internal class ErrorPopup : NcWindow
 
     public string InitPopup(NcWindow parentWindow, string message)
     {
-        Initialize(parentWindow.Size.GetHorizontalPartial(3, 1).GetVerticalPartial(3, 1));
+        Initialize(parentWindow.Size.GetHorizontalPartial(5, 1, 3).GetVerticalPartial(3, 1));
         _parentWindow = parentWindow;
         _message = message.ShortenString(Size.Columns - 2);
         _parentWindow.Children.Add(this);

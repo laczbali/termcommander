@@ -78,6 +78,8 @@ internal class FilesystemView : ScrollMenu
                 CloseItem();
             if (keypressed == "del")
                 DeleteItems();
+            if (keypressed == "n")
+                CreateItem();
         }
 
         this.ToggleBox(_currentPath);
@@ -148,5 +150,10 @@ internal class FilesystemView : ScrollMenu
     private void DeleteItems()
     {
         // TODO: delete stuff
+    }
+
+    private void CreateItem()
+    {
+        // TODO: create stuff
     }
 }

@@ -17,35 +17,72 @@ public class WindowSize
     public int GetHorizontalCenter(int offset = 0) => (Columns / 2) + offset;
     public int GetVerticalCenter(int offset = 0) => (Rows / 2) + offset;
 
-    public WindowSize GetHorizontalPartial(int divideBy = 2, int index = 0)
+    public WindowSize GetHorizontalPartial(int divideBy, params int[] index)
     {
-        var result = GetPartial(divideBy, index, Columns, Rows, ColumnsOrigin, RowOrigin);
-        return new WindowSize
-        (
-            rows: result.secondary,
-            columns: result.primary,
-            rowOrigin: result.secondaryOrigin,
-            columnsOrigin: result.primaryOrigin
-        );
+        var splitSizes = DivideHorizontally(divideBy);
+        var size = splitSizes[index[0]];
+        for (var i = 1; i < index.Length; i++)
+        {
+            size = size.MergeWith(splitSizes[index[i]]);
+        }
+        return size;
     }
 
-    public WindowSize GetVerticalPartial(int divideBy = 2, int index = 0)
+    public WindowSize GetVerticalPartial(int divideBy, params int[] index)
     {
-        var result = GetPartial(divideBy, index, Rows, Columns, RowOrigin, ColumnsOrigin);
-        return new WindowSize
-        (
-            rows: result.primary,
-            columns: result.secondary,
-            rowOrigin: result.primaryOrigin,
-            columnsOrigin: result.secondaryOrigin
-        );
+        var splitSizes = DivideVertically(divideBy);
+        var size = splitSizes[index[0]];
+        for (var i = 1; i < index.Length; i++)
+        {
+            size = size.MergeWith(splitSizes[index[i]]);
+        }
+        return size;
     }
 
-    private (int primary, int secondary, int primaryOrigin, int secondaryOrigin) GetPartial(int divideBy, int index, int primary, int secondary, int primaryOrigin, int secondaryOrigin)
+    public WindowSize MergeWith(WindowSize target)
     {
-        if (divideBy < 2) throw new ArgumentException("divideBy must be 2 or more");
-        if (index < 0 || index >= divideBy) throw new ArgumentException("index must be between 0 and divideBy - 1");
-        return (primary / divideBy, secondary, primaryOrigin + (primary / divideBy * index), secondaryOrigin);
+        var rowOrigin = Math.Min(RowOrigin, target.RowOrigin);
+        var columnOrigin = Math.Min(ColumnsOrigin, target.ColumnsOrigin);
+
+        var endRow = RowOrigin + Rows;
+        var targetEndRow = target.RowOrigin + target.Rows;
+        var rows = Math.Max(endRow, targetEndRow) - rowOrigin;
+
+        var endColumn = ColumnsOrigin + Columns;
+        var targetEndColumn = target.ColumnsOrigin + target.Columns;
+        var columns = Math.Max(endColumn, targetEndColumn) - columnOrigin;
+
+        return new WindowSize(rows, columns, rowOrigin, columnOrigin);
+    }
+
+    public List<WindowSize> DivideHorizontally(int divideBy)
+    {
+        var sizes = new List<WindowSize>();
+        for (var i = 0; i < divideBy; i++)
+        {
+            sizes.Add(new WindowSize(
+                Rows,
+                Columns / divideBy,
+                RowOrigin,
+                ColumnsOrigin + (Columns / divideBy) * i
+            ));
+        }
+        return sizes;
+    }
+
+    public List<WindowSize> DivideVertically(int divideBy)
+    {
+        var sizes = new List<WindowSize>();
+        for (var i = 0; i < divideBy; i++)
+        {
+            sizes.Add(new WindowSize(
+                Rows / divideBy,
+                Columns,
+                RowOrigin + (Rows / divideBy) * i,
+                ColumnsOrigin
+            ));
+        }
+        return sizes;
     }
 
     public static WindowSize Null => new WindowSize(0, 0, 0, 0);
