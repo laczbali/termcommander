@@ -13,7 +13,6 @@ internal class FilesystemView : ScrollMenu
     private List<string> _dirs = new();
     private List<int> _selectedItems = new();
     private Dictionary<string, int> _cursorPositionHistory = new();
-    private string errorPopupId = string.Empty;
 
     public bool HasActivePopup => Children.Any();
 
@@ -125,7 +124,7 @@ internal class FilesystemView : ScrollMenu
             catch (UnauthorizedAccessException)
             {
                 Debug.WriteLine($"Access denied to {dir}");
-                errorPopupId = new ErrorPopup().InitPopup(this, "Access denied");
+                new ErrorPopup().InitPopup(this, "Access denied");
             }
         }
         else
