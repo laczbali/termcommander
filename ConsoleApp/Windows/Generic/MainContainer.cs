@@ -1,6 +1,6 @@
 ﻿using ConsoleApp.Windows.Filesystem;
-using Display;
-using Display.Models;
+using NetCurses;
+using NetCurses.Models;
 
 namespace ConsoleApp.Windows.Generic;
 internal class MainContainer : NcWindow

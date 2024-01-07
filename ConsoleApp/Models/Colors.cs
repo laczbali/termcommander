@@ -1,4 +1,4 @@
-﻿using Display.Models;
+﻿using NetCurses.Models;
 using Mindmagma.Curses;
 
 namespace ConsoleApp.Models;

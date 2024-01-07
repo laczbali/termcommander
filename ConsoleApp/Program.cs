@@ -1,6 +1,6 @@
 ﻿using ConsoleApp.Models;
 using ConsoleApp.Windows.Generic;
-using Display;
+using NetCurses;
 
 Console.WriteLine("Terminal Commander - by blaczko");
 Console.WriteLine("Press any key to continue");

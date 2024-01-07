@@ -1,8 +1,8 @@
 ﻿using ConsoleApp.Models;
 using ConsoleApp.Windows.Generic;
-using Display;
-using Display.Components;
-using Display.Models;
+using NetCurses;
+using NetCurses.Components;
+using NetCurses.Models;
 using System.Diagnostics;
 
 namespace ConsoleApp.Windows.Filesystem;

@@ -8,7 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Display\Display.csproj" />
+    <PackageReference Include="Blaczko.NetCurses" Version="1.0.3" />
   </ItemGroup>
 
 </Project>

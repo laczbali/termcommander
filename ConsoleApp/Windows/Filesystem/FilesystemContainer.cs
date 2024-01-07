@@ -1,5 +1,5 @@
-﻿using Display;
-using Display.Models;
+﻿using NetCurses;
+using NetCurses.Models;
 
 namespace ConsoleApp.Windows.Filesystem;
 internal class FilesystemContainer : NcWindow

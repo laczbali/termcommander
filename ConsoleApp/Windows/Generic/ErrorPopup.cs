@@ -1,6 +1,6 @@
-﻿using Display;
-using Display.Extensions;
-using Display.Models;
+﻿using NetCurses;
+using NetCurses.Extensions;
+using NetCurses.Models;
 
 namespace ConsoleApp.Windows.Generic;
 internal class ErrorPopup : NcWindow
