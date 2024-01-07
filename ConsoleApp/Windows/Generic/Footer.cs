@@ -1,5 +1,4 @@
 ﻿using Display;
-using Display.Extensions;
 using Display.Models;
 
 namespace ConsoleApp.Windows.Generic;

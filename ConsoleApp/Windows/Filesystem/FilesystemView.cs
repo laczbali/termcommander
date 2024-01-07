@@ -1,7 +1,7 @@
 ﻿using ConsoleApp.Models;
 using ConsoleApp.Windows.Generic;
+using Display;
 using Display.Components;
-using Display.Extensions;
 using Display.Models;
 using System.Diagnostics;
 

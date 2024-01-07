@@ -3,12 +3,12 @@ using Mindmagma.Curses;
 
 namespace Display;
 
-public abstract class NcWindow
+public abstract partial class NcWindow
 {
     public bool IsActive = false;
 
     private IntPtr _windowObj = IntPtr.Zero;
-    internal IntPtr windowObj => _windowObj;
+
     private WindowSize _size = WindowSize.Null;
 
     private string _id = GetId();
